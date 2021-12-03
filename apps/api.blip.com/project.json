@@ -1,0 +1,44 @@
+{
+  "root": "apps/api.blip.com",
+  "sourceRoot": "apps/api.blip.com/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/api.blip.com",
+        "main": "apps/api.blip.com/src/main.ts",
+        "tsConfig": "apps/api.blip.com/tsconfig.app.json",
+        "assets": ["apps/api.blip.com/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/api.blip.com/src/environments/environment.ts",
+              "with": "apps/api.blip.com/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "api.blip.com:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/api.blip.com/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
